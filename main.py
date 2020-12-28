@@ -26,15 +26,14 @@ Input parameters:
     - rope slack (additionall length)                                 
                                  
 Output:
-    - force at quickdraw over time
-    - animation
+    - Climber position over time
+    - scalar rope force
+    - force at quickdraw
 """
 ## Imports
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 from Plotting import plot_background
-from Plotting import animate
 import math
 
 
@@ -65,7 +64,7 @@ acc_c[:, 0] = [0, g]
 ## Initialize
 pos_c[:, 0] = np.array([math.tan(math.radians(angle_wall)) * h_c, h_c])
 pos_q =np.array([math.tan(math.radians(angle_wall)) * h_q, h_q])
-length_qc = np.linalg.norm(pos_c[:, 0] - pos_q) # rope leength between climber and quickdraw at start
+length_qc = np.linalg.norm(pos_c[:, 0] - pos_q) # rope length between climber and quickdraw at start
 lr_0 = np.linalg.norm(pos_q) + length_qc + slack  # length of rope, other end is fixed at origin
 lr = np.ones_like(t) * lr_0
 strain = np.zeros_like(t)
@@ -162,9 +161,8 @@ for i in range(len(t)-1):
         
 print("Time integration finished.")
 
-#anim = animation.FuncAnimation(fig, animate,  fargs=(pos_c, plot_c, ax, width_bg, h_bg))    
-#+plt.show()
-## Ppostprocessing
+
+## Postprocessing
 fig, plot_c, width_bg, h_bg = plot_background(h_c, h_q, angle_wall)
 ax = fig.gca()
 plt.plot(pos_c[0,0:i], pos_c[1,0:i])
