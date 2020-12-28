@@ -29,7 +29,7 @@ def plot_background(h_c, h_q, angle_wall):
     return fig, plot_c, width_bg, h_bg
 
     
-   """ 
+""" 
 def animate(i, pos_c, plot_c, ax, width_bg, h_bg):
     #point_c = plt.plot(pos_c[0, i], pos_c[1, i],"k")
     #plot_c = plot_c[0]

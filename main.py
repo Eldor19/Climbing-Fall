@@ -40,16 +40,16 @@ import math
 
 plt.close('all')
 ## Input parameters
-m = 60  # kg
-h_c = 3.5 # m
-h_q = 2.5
+m = 100  # kg
+h_c = 15# m
+h_q = 12
 angle_wall = 30  # deg
 slack = 1  # m, must be >0
 modulus_rope = 25000 # N, equal to young time s crossectional area
 
 ## Constants
 g = -9.81
-t_end = 3  # s
+t_end = 4  # s
 t_step = 0.001  # s
 t = np.arange(0, t_end, t_step)
 pos_c = np.zeros((2, len(t)))
@@ -143,7 +143,7 @@ for i in range(len(t)-1):
         
         # calculate resulting force on quickdraw
         # summs forces from q to origin and force from to q to c
-        F_left =  F_r[i] * pos_q / np.linalg.norm(pos_q)
+        F_left =  - F_r[i] * pos_q / np.linalg.norm(pos_q)
         F_right = - F_r[i] * direction
         F_q_vec[:, i] = - (F_left + F_right)
         
